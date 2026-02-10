@@ -12,6 +12,7 @@ on:
 jobs:
   send-newsletter:
     runs-on: ubuntu-latest
+    environment: newsletter  # Utilise l'environnement dédié
 
     steps:
       - name: Checkout code
@@ -34,6 +35,7 @@ jobs:
         env:
           NEWSLETTER_EMAIL: ${{ secrets.NEWSLETTER_EMAIL }}
           NEWSLETTER_PASSWORD: ${{ secrets.NEWSLETTER_PASSWORD }}
+          NEWSLETTER_RECIPIENT: ${{ secrets.NEWSLETTER_RECIPIENT }}
         run: |
           if [ -z "${{ github.event.inputs.issue }}" ]; then
             python scripts/send_newsletter.py

@@ -28,7 +28,7 @@ def send_newsletter(issue):
     # Vérifier que les paramètres sont configurés
     if not all([SENDER_EMAIL, SENDER_PASSWORD, RECIPIENT_EMAIL]):
         print("❌ Erreur : Variables d'environnement manquantes")
-        print("   Assurez-vous que NEWSLETTER_EMAIL, NEWSLETTER_PASSWORD et NEWSLETTER_RECIPIENT sont définis")
+        print("   Assurez-vous que NEWSLETTER_EMAIL, NEWSLETTER_PASSWORD sont définis")
         print("   - Localement : via .env")
         print("   - GitHub Actions : via Secrets")
         sys.exit(1)
