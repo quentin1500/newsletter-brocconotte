@@ -16,7 +16,7 @@ except ImportError:
 # Variables d'environnement (via .env local ou GitHub Secrets)
 SENDER_EMAIL = os.getenv("NEWSLETTER_EMAIL")
 SENDER_PASSWORD = os.getenv("NEWSLETTER_PASSWORD")
-RECIPIENT_EMAIL = "quentin.lagonotte@gmail.com"  # Destinataire fixe pour l'instant, peut être rendu dynamique plus tard
+RECIPIENT_EMAIL = ["quentin.lagonotte@gmail.com", "q.lagonotte@groupeonepoint.com", "quentin.lagonotte@nantes-metropole.fr"]  # Destinataire fixe pour l'instant, peut être rendu dynamique plus tard
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
 DIST_DIR = "dist"
@@ -50,7 +50,15 @@ def send_newsletter(issue):
     message = MIMEMultipart("alternative")
     message["Subject"] = subject
     message["From"] = SENDER_EMAIL
-    message["To"] = RECIPIENT_EMAIL
+    # Utiliser BCC pour masquer les destinataires entre eux
+    # Le champ "To" reste vide ou contient l'expéditeur pour éviter les spams
+    message["To"] = SENDER_EMAIL  # Évite que l'email soit marqué comme spam
+    
+    # Gérer plusieurs destinataires (liste ou string)
+    if isinstance(RECIPIENT_EMAIL, list):
+        recipients = RECIPIENT_EMAIL
+    else:
+        recipients = [RECIPIENT_EMAIL] if RECIPIENT_EMAIL else []
     
     # Ajouter le contenu HTML
     html_part = MIMEText(html_content, "html")
@@ -62,9 +70,10 @@ def send_newsletter(issue):
         with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
             server.starttls()
             server.login(SENDER_EMAIL, SENDER_PASSWORD)
-            server.sendmail(SENDER_EMAIL, RECIPIENT_EMAIL, message.as_string())
+            # sendmail() prend la liste réelle des destinataires
+            server.sendmail(SENDER_EMAIL, recipients, message.as_string())
         
-        print(f"✅ Newsletter envoyée avec succès à {RECIPIENT_EMAIL}")
+        print(f"✅ Newsletter envoyée avec succès à {len(recipients)} destinataire(s) en BCC")
         print(f"   Sujet : {subject}")
     
     except smtplib.SMTPAuthenticationError:
