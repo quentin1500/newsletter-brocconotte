@@ -1,27 +1,253 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{ title }}</title>
   <style>
-    body { font-family: Arial, sans-serif; }
-    .container { max-width: 600px; margin: auto; }
-    h1 { color: #333; }
+    /* Polices web */
+    @font-face {
+      font-family: "Six Hands Web Brush";
+      src: url("https://db.onlinewebfonts.com/t/dde3fd8ec4a704fdfdd57f3ec071a01c.woff2") format("woff2"),
+           url("https://db.onlinewebfonts.com/t/dde3fd8ec4a704fdfdd57f3ec071a01c.woff") format("woff");
+    }
+    
+    /* Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      color: #222;
+      background: #fce8b3;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* Container principal */
+    .email-wrapper {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Header avec GIF */
+    .header {
+      background: linear-gradient(135deg, #f5c74b 0%, #f9d45e 100%);
+      padding: 30px 20px;
+      text-align: center;
+      position: relative;
+    }
+    
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .pixel-gif {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid #07286E;
+      background: white;
+      padding: 5px;
+    }
+    
+    .header h1 {
+      font-family: "Six Hands Web Brush", cursive, Arial, sans-serif;
+      color: #07286E;
+      font-size: 2.2rem;
+      margin: 0;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .header .date {
+      color: #07286E;
+      font-size: 1rem;
+      opacity: 0.8;
+      margin-top: 10px;
+    }
+    
+    /* Corps du contenu */
+    .content {
+      padding: 30px 25px;
+      background: #ffffff;
+    }
+    
+    .intro {
+      background: #fce8b3;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+      border-left: 4px solid #f5c74b;
+    }
+    
+    .intro h1, .intro h2 {
+      font-family: "Six Hands Web Brush", cursive, Arial, sans-serif;
+      color: #07286E;
+      margin-bottom: 15px;
+    }
+    
+    .intro p {
+      margin: 10px 0;
+      color: #222;
+    }
+    
+    .intro ul {
+      margin: 15px 0;
+      padding-left: 25px;
+    }
+    
+    .intro li {
+      margin: 8px 0;
+      color: #222;
+    }
+    
+    /* Articles */
+    .articles h1, .articles h2 {
+      font-family: "Six Hands Web Brush", cursive, Arial, sans-serif;
+      color: #07286E;
+      margin: 25px 0 15px 0;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #f5c74b;
+    }
+    
+    .articles p {
+      margin: 12px 0;
+      color: #222;
+      text-align: justify;
+    }
+    
+    .articles img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 20px 0;
+      display: block;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .articles ul {
+      margin: 15px 0;
+      padding-left: 25px;
+    }
+    
+    .articles li {
+      margin: 8px 0;
+      color: #222;
+    }
+    
+    /* Séparateur */
+    .separator {
+      height: 2px;
+      background: linear-gradient(to right, transparent, #f5c74b, transparent);
+      margin: 30px 0;
+      border: none;
+    }
+    
+    /* Footer */
+    .footer {
+      background: #07286E;
+      color: white;
+      padding: 25px 20px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    
+    .footer p {
+      margin: 8px 0;
+    }
+    
+    .footer a {
+      color: #f5c74b;
+      text-decoration: none;
+      font-weight: bold;
+      transition: opacity 0.3s;
+    }
+    
+    .footer a:hover {
+      opacity: 0.8;
+    }
+    
+    .footer .branding {
+      margin-top: 15px;
+      font-family: "Six Hands Web Brush", cursive, Arial, sans-serif;
+      font-size: 1.3rem;
+      color: #f5c74b;
+    }
+    
+    /* Responsive */
+    @media only screen and (max-width: 600px) {
+      .email-wrapper {
+        border-radius: 0;
+      }
+      
+      .header h1 {
+        font-size: 1.8rem;
+      }
+      
+      .pixel-gif {
+        width: 60px;
+        height: 60px;
+      }
+      
+      .content {
+        padding: 20px 15px;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>{{ title }}</h1>
-    <p><em>{{ date }}</em></p>
-
-    <div>
-      {{ intro|safe }}
+  <div class="email-wrapper">
+    <!-- Header avec GIF pixel art -->
+    <div class="header">
+      <div class="header-content">
+        <img src="https://quentin1500.github.io/newsletter-brocconotte/templates/pixel_art.gif" 
+             alt="Brocconotte" 
+             class="pixel-gif" />
+        <h1>{{ title }}</h1>
+      </div>
+      <p class="date">{{ date }}</p>
     </div>
 
-    <hr />
+    <!-- Contenu -->
+    <div class="content">
+      <!-- Intro -->
+      <div class="intro">
+        {{ intro|safe }}
+      </div>
 
-    {{ articles|safe }}
+      <!-- Séparateur -->
+      <hr class="separator" />
 
+      <!-- Articles -->
+      <div class="articles">
+        {{ articles|safe }}
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p class="branding">BROCCONOTTE</p>
+      <p>Twingo Maroco Tour 2026 – Notre aventure solidaire</p>
+      <p>
+        Suivez-nous sur 
+        <a href="https://www.instagram.com/brocconotte" target="_blank">@brocconotte</a>
+      </p>
+      <p style="margin-top: 15px; opacity: 0.8;">
+        © {{ date.split('-')[0] if date else '2026' }} Brocconotte – Tous droits réservés
+      </p>
+    </div>
   </div>
 </body>
 </html>
