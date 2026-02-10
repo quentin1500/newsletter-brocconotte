@@ -3,6 +3,7 @@ import yaml
 import markdown
 from jinja2 import Environment, FileSystemLoader
 import re
+import sys
 from PIL import Image
 
 
@@ -94,5 +95,36 @@ def build_newsletter(issue):
     print(f"Newsletter générée : {output_path}")
 
 if __name__ == "__main__":
-    issues = sorted(os.listdir(CONTENT_DIR))
-    build_newsletter(issues[-1])  # dernière édition
+    # Récupérer l'issue depuis l'argument ou les variables d'environnement (GitHub Actions)
+    issue = None
+    
+    # 1. Vérifier l'argument en ligne de commande
+    if len(sys.argv) > 1:
+        issue = sys.argv[1]
+        if issue.strip():  # Si l'argument n'est pas vide
+            print(f"📰 Building issue: {issue}")
+        else:
+            issue = None
+    
+    # 2. Vérifier la variable d'environnement (GitHub Actions)
+    if not issue:
+        issue = os.getenv("NEWSLETTER_ISSUE")
+        if issue:
+            print(f"📰 Building issue from env: {issue}")
+    
+    # 3. Si aucun issue spécifié, utiliser la dernière
+    if not issue:
+        issues = sorted(os.listdir(CONTENT_DIR))
+        if not issues:
+            print("❌ Erreur : Aucune newsletter trouvée dans le dossier 'content'")
+            sys.exit(1)
+        issue = issues[-1]
+        print(f"📰 Building latest issue: {issue}")
+    
+    # Vérifier que l'issue existe
+    issue_path = os.path.join(CONTENT_DIR, issue)
+    if not os.path.isdir(issue_path):
+        print(f"❌ Erreur : Issue non trouvée: {issue_path}")
+        sys.exit(1)
+    
+    build_newsletter(issue)

@@ -11,7 +11,7 @@ load_dotenv()
 
 SENDER_EMAIL = os.getenv("NEWSLETTER_EMAIL")
 SENDER_PASSWORD = os.getenv("NEWSLETTER_PASSWORD")
-RECIPIENT_EMAIL = os.getenv("NEWSLETTER_RECIPIENT")
+RECIPIENT_EMAIL = "quentin.lagonotte@gmail.com"  # Destinataire fixe pour l'instant, peut être mis dans .env si besoin
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
 

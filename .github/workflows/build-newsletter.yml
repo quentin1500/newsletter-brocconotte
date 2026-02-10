@@ -1,11 +1,14 @@
 name: Build Newsletter
 
 on:
-  push:
-    paths:
-      - "content/**"
-      - "templates/**"
-      - "scripts/**"
+  # Déclencher manuellement depuis GitHub
+  workflow_dispatch:
+    inputs:
+      issue:
+        description: 'Issue à builder (ex: 2025-02-10), laisser vide pour la dernière'
+        required: false
+        type: string
+
 
 jobs:
   build:
@@ -25,6 +28,8 @@ jobs:
           pip install -r requirements.txt
 
       - name: Build newsletter
+        env:
+          NEWSLETTER_ISSUE: ${{ github.event.inputs.issue }}
         run: |
           python scripts/build_newsletter.py
 
