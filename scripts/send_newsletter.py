@@ -16,7 +16,7 @@ except ImportError:
 # Variables d'environnement (via .env local ou GitHub Secrets)
 SENDER_EMAIL = os.getenv("NEWSLETTER_EMAIL")
 SENDER_PASSWORD = os.getenv("NEWSLETTER_PASSWORD")
-RECIPIENT_EMAIL = ["quentin.lagonotte@gmail.com", "q.lagonotte@groupeonepoint.com", "Quentin.LAGONOTTE@nantesmetropole.fr"]  # Destinataire fixe pour l'instant, peut être rendu dynamique plus tard
+RECIPIENT_EMAIL = ["quentin.lagonotte@gmail.com", "q.lagonotte@groupeonepoint.com", "manonbroccolicchi@hotmail.fr"]  # Destinataire fixe pour l'instant, peut être rendu dynamique plus tard
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
 DIST_DIR = "dist"
