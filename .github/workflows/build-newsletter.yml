@@ -1,0 +1,35 @@
+name: Build Newsletter
+
+on:
+  push:
+    paths:
+      - "content/**"
+      - "templates/**"
+      - "scripts/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Build newsletter
+        run: |
+          python scripts/build_newsletter.py
+
+      - name: Upload HTML artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: newsletter-html
+          path: dist/

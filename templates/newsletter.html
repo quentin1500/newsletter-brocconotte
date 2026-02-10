@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>{{ title }}</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .container { max-width: 600px; margin: auto; }
+    h1 { color: #333; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>{{ title }}</h1>
+    <p><em>{{ date }}</em></p>
+
+    <div>
+      {{ intro|safe }}
+    </div>
+
+    <hr />
+
+    {{ articles|safe }}
+
+  </div>
+</body>
+</html>
