@@ -16,11 +16,11 @@ MAX_IMAGE_WIDTH = 600
 env = Environment(loader=FileSystemLoader(TEMPLATE_DIR))
 
 def load_meta(path):
-    with open(path, "r") as f:
+    with open(path, "r", encoding="utf-8") as f:
         return yaml.safe_load(f)
 
 def md_to_html(path):
-    with open(path, "r") as f:
+    with open(path, "r", encoding="utf-8") as f:
         return markdown.markdown(f.read())
 
 def resize_images_in_issue(issue_path):
@@ -89,7 +89,7 @@ def build_newsletter(issue):
 
     os.makedirs(DIST_DIR, exist_ok=True)
     output_path = os.path.join(DIST_DIR, f"{issue}.html")
-    with open(output_path, "w") as f:
+    with open(output_path, "w", encoding="utf-8") as f:
         f.write(html)
 
     print(f"Newsletter générée : {output_path}")
