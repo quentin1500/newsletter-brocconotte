@@ -10,7 +10,7 @@ from PIL import Image
 CONTENT_DIR = "content"
 TEMPLATE_DIR = "templates"
 DIST_DIR = "dist"
-BASE_IMAGE_URL = "https://quentin1500.github.io/newsletter-brocconotte/"
+BASE_IMAGE_URL = "https://newsletter.brocconotte.fr/"
 MAX_IMAGE_WIDTH = 600
 
 env = Environment(loader=FileSystemLoader(TEMPLATE_DIR))
