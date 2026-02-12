@@ -69,6 +69,24 @@ python scripts/build_newsletter.py
 python scripts/build_newsletter.py 2025-02-10
 ```
 
+## Scripts disponibles (usages)
+
+### Créer le dossier du jour
+
+```bash
+python scripts/create_issue_folder.py
+```
+
+Crée automatiquement `content/YYYY-MM-DD/` avec la date du jour.
+
+### Générer la liste des newsletters (archives)
+
+```bash
+python scripts/generate_newsletter_list.py
+```
+
+Produit `newsletters.json` à partir des fichiers HTML générés.
+
 ## Envoi par email (local)
 
 Configurer `.env` (ne pas versionner) :
@@ -109,6 +127,8 @@ Optionnel : fournir l’`issue` à envoyer.
 - Template email : [templates/newsletter.html](templates/newsletter.html)
 - Script build : [scripts/build_newsletter.py](scripts/build_newsletter.py)
 - Script envoi : [scripts/send_newsletter.py](scripts/send_newsletter.py)
+- Script dossier du jour : [scripts/create_issue_folder.py](scripts/create_issue_folder.py)
+- Script liste archives : [scripts/generate_newsletter_list.py](scripts/generate_newsletter_list.py)
 
 ## Notes
 
