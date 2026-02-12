@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inscription Newsletter - Brocconotte</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #fce8b3;
+      color: #222;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+    
+    .wrapper {
+      max-width: 600px;
+      margin: 40px auto;
+      background: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    .header {
+      background: #f5c74b;
+      text-align: center;
+      padding: 30px 20px;
+    }
+    
+    .header img {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto;
+    }
+    
+    .header h1 {
+      color: #07286E;
+      font-size: 28px;
+      margin: 15px 0 5px 0;
+      font-weight: bold;
+    }
+    
+    .header p {
+      color: #07286E;
+      font-size: 14px;
+      margin: 5px 0;
+    }
+    
+    .content {
+      padding: 30px 25px;
+    }
+    
+    .intro {
+      background: #fce8b3;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      border-left: 4px solid #f5c74b;
+    }
+    
+    .intro h2 {
+      color: #07286E;
+      margin-top: 0;
+      font-size: 20px;
+    }
+    
+    .intro p {
+      margin: 10px 0;
+    }
+    
+    .archives {
+      margin: 25px 0;
+    }
+    
+    .archives h3 {
+      color: #07286E;
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+    
+    .archives ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .archives li {
+      margin: 8px 0;
+    }
+    
+    .archives a {
+      color: #07286E;
+      text-decoration: none;
+      padding: 8px 12px;
+      background: #fce8b3;
+      border-radius: 4px;
+      display: inline-block;
+      transition: background 0.3s;
+    }
+    
+    .archives a:hover {
+      background: #f5c74b;
+    }
+    
+    .subscribe-form {
+      margin: 30px 0;
+    }
+    
+    .subscribe-form h3 {
+      color: #07286E;
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: #222;
+      font-weight: bold;
+    }
+    
+    .form-group input[type="email"] {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #f5c74b;
+      border-radius: 6px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+    
+    .form-group input[type="email"]:focus {
+      outline: none;
+      border-color: #07286E;
+    }
+    
+    .submit-btn {
+      background: #f5c74b;
+      color: #07286E;
+      border: none;
+      padding: 14px 30px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+      width: 100%;
+    }
+    
+    .submit-btn:hover {
+      background: #07286E;
+      color: #ffffff;
+    }
+    
+    .submit-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    
+    .message {
+      padding: 12px;
+      border-radius: 6px;
+      margin-top: 15px;
+      display: none;
+    }
+    
+    .message.success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    
+    .message.error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    
+    .footer {
+      background: #07286E;
+      color: #ffffff;
+      text-align: center;
+      padding: 20px;
+      font-size: 12px;
+    }
+    
+    .footer a {
+      color: #f5c74b;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    
+    @media (max-width: 600px) {
+      .wrapper {
+        margin: 20px;
+        border-radius: 8px;
+      }
+      
+      .content {
+        padding: 20px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Header -->
+    <div class="header">
+      <img src="https://quentin1500.github.io/newsletter-brocconotte/templates/pixel_art.gif" 
+           alt="Brocconotte" />
+      <h1>Newsletter Brocconotte</h1>
+      <p>Twingo Maroco Tour 2026 – Notre aventure solidaire</p>
+    </div>
+
+    <!-- Contenu -->
+    <div class="content">
+      <!-- Introduction -->
+      <div class="intro">
+        <h2>Rejoins notre aventure !</h2>
+        <p>
+          Reçois les dernières nouvelles de notre périple en Twingo jusqu'à Marrakech,
+          nos aventures, nos défis et l'impact de notre mission humanitaire.
+        </p>
+      </div>
+
+      <!-- Archives newsletters -->
+      <div class="archives">
+        <h3>📰 Newsletters précédentes</h3>
+        <ul id="newsletter-list">
+          <li>Chargement...</li>
+        </ul>
+      </div>
+
+      <!-- Formulaire d'inscription -->
+      <div class="subscribe-form">
+        <h3>✉️ S'inscrire à la newsletter</h3>
+        <form id="subscribeForm">
+          <div class="form-group">
+            <label for="email">Adresse email</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              placeholder="ton.email@exemple.com" 
+              required 
+            />
+          </div>
+          <button type="submit" class="submit-btn" id="submitBtn">
+            S'inscrire
+          </button>
+          <div id="message" class="message"></div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p style="margin: 6px 0; font-weight: bold;">BROCCONOTTE</p>
+      <p style="margin: 6px 0;">
+        Suivez-nous sur 
+        <a href="https://www.instagram.com/brocconotte" target="_blank">@brocconotte</a>
+      </p>
+      <p style="margin: 6px 0;">© 2026 Brocconotte – Tous droits réservés</p>
+    </div>
+  </div>
+
+  <script>
+    // URL du Google Apps Script Web App (à configurer)
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwU0fzjtBlISf1MC9Onxa9Wu-2VWVpHXPXyhxBhGfbpAefA1aBBrzgD-Nycju6xC0Pv/exec';
+
+    const form = document.getElementById('subscribeForm');
+    const emailInput = document.getElementById('email');
+    const submitBtn = document.getElementById('submitBtn');
+    const messageDiv = document.getElementById('message');
+    const newsletterList = document.getElementById('newsletter-list');
+
+    // Charger la liste des newsletters
+    async function loadNewsletters() {
+      try {
+        const response = await fetch('newsletters.json');
+        const newsletters = await response.json();
+        
+        if (newsletters.length === 0) {
+          newsletterList.innerHTML = '<li style="color: #666;">Aucune newsletter disponible pour le moment.</li>';
+          return;
+        }
+        
+        newsletterList.innerHTML = newsletters.map(nl => `
+          <li>
+            <a href="${nl.filename}" target="_blank">${nl.title}</a>
+          </li>
+        `).join('');
+        
+      } catch (error) {
+        console.error('Erreur chargement newsletters:', error);
+        newsletterList.innerHTML = '<li style="color: #666;">Erreur de chargement des newsletters.</li>';
+      }
+    }
+
+    // Charger au démarrage
+    loadNewsletters();
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const email = emailInput.value.trim();
+      
+      // Validation email simple
+      if (!email || !email.includes('@')) {
+        showMessage('Veuillez entrer une adresse email valide.', 'error');
+        return;
+      }
+
+      // Désactiver le bouton pendant l'envoi
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Inscription en cours...';
+      messageDiv.style.display = 'none';
+
+      try {
+        const response = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email: email })
+        });
+
+        // Mode no-cors ne permet pas de lire la réponse, on considère que c'est OK
+        showMessage('✅ Inscription réussie ! Merci de rejoindre notre aventure.', 'success');
+        emailInput.value = '';
+        
+      } catch (error) {
+        console.error('Erreur:', error);
+        showMessage('❌ Une erreur est survenue. Réessaye plus tard.', 'error');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'S\'inscrire';
+      }
+    });
+
+    function showMessage(text, type) {
+      messageDiv.textContent = text;
+      messageDiv.className = `message ${type}`;
+      messageDiv.style.display = 'block';
+    }
+  </script>
+</body>
+</html>
