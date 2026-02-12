@@ -1,6 +1,6 @@
 # Comment souscrire ?
 
-Pour souscrire, rien de plus simple : va sur notre site internet et fournis ton adresse e-mail.
+Pour souscrire, va sur notre site internet et fournis ton adresse e-mail : https://newsletter.brocconotte.fr/
 
 
 ![image](images/email.png)

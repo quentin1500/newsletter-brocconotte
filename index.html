@@ -291,7 +291,7 @@
         
         newsletterList.innerHTML = newsletters.map(nl => `
           <li>
-            <a href="${nl.filename}" target="_blank">${nl.title}</a>
+            <a href="dist/${nl.filename}" target="_blank">${nl.title}</a>
           </li>
         `).join('');
         
