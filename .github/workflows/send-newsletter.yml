@@ -35,6 +35,9 @@ jobs:
         env:
           NEWSLETTER_EMAIL: ${{ secrets.NEWSLETTER_EMAIL }}
           NEWSLETTER_PASSWORD: ${{ secrets.NEWSLETTER_PASSWORD }}
+          GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
+          GOOGLE_SHEET_RANGE: ${{ secrets.GOOGLE_SHEET_RANGE }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
         run: |
           if [ -z "${{ github.event.inputs.issue }}" ]; then
             python scripts/send_newsletter.py

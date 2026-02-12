@@ -1,9 +1,12 @@
 import os
 import sys
 import re
+import json
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from google.oauth2.service_account import Credentials
+from googleapiclient.discovery import build
 
 # Charger .env localement si disponible (dev mode)
 try:
@@ -16,17 +19,61 @@ except ImportError:
 # Variables d'environnement (via .env local ou GitHub Secrets)
 SENDER_EMAIL = os.getenv("NEWSLETTER_EMAIL")
 SENDER_PASSWORD = os.getenv("NEWSLETTER_PASSWORD")
-RECIPIENT_EMAIL = ["quentin.lagonotte@gmail.com", "q.lagonotte@groupeonepoint.com"]  # Destinataire fixe pour l'instant, peut être rendu dynamique plus tard
+GOOGLE_SHEET_ID = os.getenv("GOOGLE_SHEET_ID")
+GOOGLE_SHEET_RANGE = os.getenv("GOOGLE_SHEET_RANGE", "Sheet1!A2:A")
+GOOGLE_SERVICE_ACCOUNT_FILE = os.getenv("GOOGLE_SERVICE_ACCOUNT_FILE")
+GOOGLE_SERVICE_ACCOUNT_JSON = os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON")
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
 DIST_DIR = "dist"
+
+SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
+
+
+def get_google_credentials():
+    if GOOGLE_SERVICE_ACCOUNT_JSON:
+        info = json.loads(GOOGLE_SERVICE_ACCOUNT_JSON)
+        return Credentials.from_service_account_info(info, scopes=SCOPES)
+    if GOOGLE_SERVICE_ACCOUNT_FILE:
+        return Credentials.from_service_account_file(GOOGLE_SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+    print("❌ Erreur : Identifiants Google Sheets manquants")
+    print("   Définis GOOGLE_SERVICE_ACCOUNT_JSON ou GOOGLE_SERVICE_ACCOUNT_FILE")
+    sys.exit(1)
+
+
+def load_recipients_from_sheet():
+    if not GOOGLE_SHEET_ID:
+        print("❌ Erreur : GOOGLE_SHEET_ID manquant")
+        sys.exit(1)
+
+    creds = get_google_credentials()
+    service = build("sheets", "v4", credentials=creds)
+    result = service.spreadsheets().values().get(
+        spreadsheetId=GOOGLE_SHEET_ID,
+        range=GOOGLE_SHEET_RANGE,
+    ).execute()
+    values = result.get("values", [])
+
+    emails = []
+    for row in values:
+        for cell in row:
+            cell = (cell or "").strip()
+            if cell and "@" in cell:
+                emails.append(cell)
+
+    emails = list(dict.fromkeys(emails))
+    if not emails:
+        print("❌ Erreur : Aucun destinataire trouvé dans Google Sheets")
+        sys.exit(1)
+
+    return emails
 
 
 def send_newsletter(issue):
     """Envoie la newsletter HTML par email."""
     
     # Vérifier que les paramètres sont configurés
-    if not all([SENDER_EMAIL, SENDER_PASSWORD, RECIPIENT_EMAIL]):
+    if not all([SENDER_EMAIL, SENDER_PASSWORD]):
         print("❌ Erreur : Variables d'environnement manquantes")
         print("   Assurez-vous que NEWSLETTER_EMAIL, NEWSLETTER_PASSWORD sont définis")
         print("   - Localement : via .env")
@@ -54,11 +101,8 @@ def send_newsletter(issue):
     # Le champ "To" reste vide ou contient l'expéditeur pour éviter les spams
     message["To"] = SENDER_EMAIL  # Évite que l'email soit marqué comme spam
     
-    # Gérer plusieurs destinataires (liste ou string)
-    if isinstance(RECIPIENT_EMAIL, list):
-        recipients = RECIPIENT_EMAIL
-    else:
-        recipients = [RECIPIENT_EMAIL] if RECIPIENT_EMAIL else []
+    # Charger les destinataires depuis Google Sheets
+    recipients = load_recipients_from_sheet()
     
     # Ajouter le contenu HTML
     html_part = MIMEText(html_content, "html")
