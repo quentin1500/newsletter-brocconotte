@@ -6,4 +6,4 @@ elle a roulé niquel cetait trop cool. Maintenant, on est assuré que tout va bi
 
 À nous le Maroc !!
 
-![image](images/placeholder.jpg)
+![image](IMG20260131125231.jpg)
