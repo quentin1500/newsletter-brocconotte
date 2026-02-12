@@ -2,7 +2,7 @@ import os
 import json
 import re
 
-DIST_DIR = "dist"
+DIST_DIR = "docs"
 OUTPUT_FILE = os.path.join(DIST_DIR, "newsletters.json")
 
 def extract_title_from_html(filepath):

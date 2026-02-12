@@ -9,7 +9,7 @@ from PIL import Image
 
 CONTENT_DIR = "content"
 TEMPLATE_DIR = "templates"
-DIST_DIR = "dist"
+DIST_DIR = "docs"
 BASE_IMAGE_URL = "https://newsletter.brocconotte.fr/"
 MAX_IMAGE_WIDTH = 600
 

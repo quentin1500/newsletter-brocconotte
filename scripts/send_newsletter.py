@@ -25,7 +25,7 @@ GOOGLE_SERVICE_ACCOUNT_FILE = os.getenv("GOOGLE_SERVICE_ACCOUNT_FILE")
 GOOGLE_SERVICE_ACCOUNT_JSON = os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON")
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
-DIST_DIR = "dist"
+DIST_DIR = "docs"
 
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
 
