@@ -1,9 +1,6 @@
 # Pourquoi cette newsletter ?
 
-Parce que le web mérite plus de contenus réfléchis, utiles et humains.
+Pour vous donnez les dernières nouvelles de notre périple en Twingo jusqu'à Marrakech, nos aventures, nos défis et l'impact de notre mission humanitaire.
 
-Voici ce que tu trouveras :
-
-- Des idées concrètes
-- Des retours d'expérience
-- Zéro bullshit
+- Comment souscrire ?
+- Contenu des communications

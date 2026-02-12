@@ -1,7 +1,13 @@
-# Second article
+# Contenu de nos communications
 
-Ici le contenu d'un article en particulier. Il permettra d'être séparé du premier article (peut-être ...).
+Nos communications contiendront des nouvelles sous forme de texte ainsi que quelques photos des moments les plus marquants capturés.
 
-Il y aura d'autres chose à penser ensuite, on verra...
+Nous voulons vous faire vivre notre aventure au plus près en essayant de vous transmettre des nouvelles le plus régulièrement possible. Mais ce ne sera peut-être pas si simple : dans le désert, sans internet, ou tout simplement occupés à réparer la voiture, nous ne pourrons pas envoyer de messages tous les jours. Nous pensons que la fréquence des newsletters sera d'une fois tous les 2 ou 3 jours.
 
-![image](images/itineraire.png)
+Merci pour votre suivi, ça nous donne de la force. À bientôt !
+
+Manon & Quentin  
+Brocconotte
+
+
+![image](images/DJI_0706.JPG)

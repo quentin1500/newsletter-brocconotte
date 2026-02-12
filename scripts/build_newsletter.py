@@ -128,3 +128,11 @@ if __name__ == "__main__":
         sys.exit(1)
     
     build_newsletter(issue)
+    
+    # Générer la liste des newsletters pour le site
+    print("\n📋 Génération de la liste des newsletters...")
+    import subprocess
+    try:
+        subprocess.run([sys.executable, "scripts/generate_newsletter_list.py"], check=True)
+    except subprocess.CalledProcessError:
+        print("⚠️ Erreur lors de la génération de la liste (non bloquant)")

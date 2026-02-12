@@ -1,7 +1,6 @@
-# Premier article
+# Comment souscrire ?
 
-Ici le contenu d'un article en particulier. Il permettra d'être séparé du second article.
+Pour souscrire, rien de plus simple : va sur notre site internet et fournis ton adresse e-mail.
 
-Je ne sais pas comment mettre des images ... On verra ça plus tard.
 
-![image](images/test8.jpg)
+![image](images/email.png)
