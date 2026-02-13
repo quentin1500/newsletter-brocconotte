@@ -33,6 +33,14 @@ jobs:
         run: |
           python scripts/build_newsletter.py
 
+      - name: Commit and push generated files
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git add dist/ newsletters.json
+          git diff --staged --quiet || git commit -m "Build newsletter: ${{ github.event.inputs.issue || 'latest' }}"
+          git push
+
       - name: Upload HTML artifact
         uses: actions/upload-artifact@v4
         with:
