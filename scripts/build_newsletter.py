@@ -19,6 +19,15 @@ def load_meta(path):
     with open(path, "r", encoding="utf-8") as f:
         return yaml.safe_load(f)
 
+def get_meta_path(issue_path):
+    meta_yml = os.path.join(issue_path, "meta.yml")
+    meta_yaml = os.path.join(issue_path, "meta.yaml")
+    if os.path.exists(meta_yml):
+        return meta_yml
+    if os.path.exists(meta_yaml):
+        return meta_yaml
+    return meta_yml
+
 def md_to_html(path):
     with open(path, "r", encoding="utf-8") as f:
         return markdown.markdown(f.read())
@@ -65,27 +74,50 @@ def absolutize_image_paths(html, issue):
 
 def build_newsletter(issue):
     issue_path = os.path.join(CONTENT_DIR, issue)
-    meta = load_meta(os.path.join(issue_path, "meta.yml"))
+    meta = load_meta(get_meta_path(issue_path))
+    issue_type = (meta.get("type") or "normal").strip().lower()
 
     # Redimensionner les images avant de construire la newsletter
     resize_images_in_issue(issue_path)
 
-    intro = md_to_html(os.path.join(issue_path, "intro.md"))
+    if issue_type == "canvas":
+        # Find image file in the issue directory
+        image_file = None
+        for file in os.listdir(issue_path):
+            if file.lower().endswith(('.jpg', '.jpeg', '.png', '.gif')):
+                image_file = file
+                break
+        
+        if not image_file:
+            print(f"⚠️  Aucune image trouvée dans {issue_path}")
+            sys.exit(1)
+        
+        # Create absolute URL for the image
+        image_url = f"{BASE_IMAGE_URL}content/{issue}/{image_file}"
+        
+        template = env.get_template("newsletter-canvas.html")
+        html = template.render(
+            title=meta["title"],
+            date=meta["date"],
+            image_url=image_url,
+        )
+    else:
+        intro = md_to_html(os.path.join(issue_path, "intro.md"))
 
-    articles_html = ""
-    for file in sorted(os.listdir(issue_path)):
-        if file.startswith("article") and file.endswith(".md"):
-            article_html = md_to_html(os.path.join(issue_path, file))
-            article_html = absolutize_image_paths(article_html, issue)
-            articles_html += article_html
+        articles_html = ""
+        for file in sorted(os.listdir(issue_path)):
+            if file.startswith("article") and file.endswith(".md"):
+                article_html = md_to_html(os.path.join(issue_path, file))
+                article_html = absolutize_image_paths(article_html, issue)
+                articles_html += article_html
 
-    template = env.get_template("newsletter.html")
-    html = template.render(
-        title=meta["title"],
-        date=meta["date"],
-        intro=intro,
-        articles=articles_html
-    )
+        template = env.get_template("newsletter.html")
+        html = template.render(
+            title=meta["title"],
+            date=meta["date"],
+            intro=intro,
+            articles=articles_html
+        )
 
     os.makedirs(DIST_DIR, exist_ok=True)
     output_path = os.path.join(DIST_DIR, f"{issue}.html")
