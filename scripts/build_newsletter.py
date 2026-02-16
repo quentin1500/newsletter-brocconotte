@@ -7,7 +7,6 @@ import sys
 from PIL import Image
 
 
-CONTENT_DIR = "content"
 TEMPLATE_DIR = "templates"
 DIST_DIR = "dist"
 BASE_IMAGE_URL = "https://newsletter.brocconotte.fr/"
@@ -59,7 +58,7 @@ def resize_images_in_issue(issue_path):
             except Exception as e:
                 print(f"Erreur en redimensionnant {filename} : {e}")
 
-def absolutize_image_paths(html, issue):
+def absolutize_image_paths(html, issue, content_type="content"):
     def repl(match):
         before = match.group(1)  # attributs avant src (ex: alt="image")
         src = match.group(2)      # valeur du src
@@ -67,13 +66,14 @@ def absolutize_image_paths(html, issue):
         if src.startswith("http"):
             absolute_url = src
         else:
-            absolute_url = f'{BASE_IMAGE_URL}content/{issue}/{src}'
+            absolute_url = f'{BASE_IMAGE_URL}{content_type}/{issue}/{src}'
         return f'<img{before} src="{absolute_url}"{after}>'
 
     return re.sub(r'<img([^>]*?) src="([^"]+)"([^>]*)>', repl, html)
 
-def build_newsletter(issue):
-    issue_path = os.path.join(CONTENT_DIR, issue)
+def build_newsletter(issue, content_type="content"):
+    content_dir = "planned-content" if content_type == "planned" else "content"
+    issue_path = os.path.join(content_dir, issue)
     meta = load_meta(get_meta_path(issue_path))
     issue_type = (meta.get("type") or "normal").strip().lower()
 
@@ -93,7 +93,7 @@ def build_newsletter(issue):
             sys.exit(1)
         
         # Create absolute URL for the image
-        image_url = f"{BASE_IMAGE_URL}content/{issue}/{image_file}"
+        image_url = f"{BASE_IMAGE_URL}{content_dir}/{issue}/{image_file}"
         
         template = env.get_template("newsletter-canvas.html")
         html = template.render(
@@ -108,7 +108,7 @@ def build_newsletter(issue):
         for file in sorted(os.listdir(issue_path)):
             if file.startswith("article") and file.endswith(".md"):
                 article_html = md_to_html(os.path.join(issue_path, file))
-                article_html = absolutize_image_paths(article_html, issue)
+                article_html = absolutize_image_paths(article_html, issue, content_dir)
                 articles_html += article_html
 
         template = env.get_template("newsletter.html")
@@ -129,37 +129,47 @@ def build_newsletter(issue):
 if __name__ == "__main__":
     # Récupérer l'issue depuis l'argument ou les variables d'environnement (GitHub Actions)
     issue = None
+    content_type = "content"
     
-    # 1. Vérifier l'argument en ligne de commande
+    # 1. Vérifier l'argument en ligne de commande pour le type
+    if len(sys.argv) > 2:
+        content_type = sys.argv[2].strip().lower()
+        if content_type not in ["planned", "content"]:
+            content_type = "content"
+            print(f"⚠️  Type de contenu invalide, utilisation de 'content'")
+    
+    # 2. Vérifier l'argument en ligne de commande pour l'issue
     if len(sys.argv) > 1:
         issue = sys.argv[1]
         if issue.strip():  # Si l'argument n'est pas vide
-            print(f"📰 Building issue: {issue}")
+            print(f"📰 Building issue: {issue} (type: {content_type})")
         else:
             issue = None
     
-    # 2. Vérifier la variable d'environnement (GitHub Actions)
+    # 3. Vérifier la variable d'environnement (GitHub Actions)
     if not issue:
         issue = os.getenv("NEWSLETTER_ISSUE")
         if issue:
-            print(f"📰 Building issue from env: {issue}")
+            print(f"📰 Building issue from env: {issue} (type: {content_type})")
     
-    # 3. Si aucun issue spécifié, utiliser la dernière
+    # 4. Si aucun issue spécifié, utiliser la dernière
     if not issue:
-        issues = sorted(os.listdir(CONTENT_DIR))
+        content_dir = "planned-content" if content_type == "planned" else "content"
+        issues = sorted(os.listdir(content_dir))
         if not issues:
-            print("❌ Erreur : Aucune newsletter trouvée dans le dossier 'content'")
+            print(f"❌ Erreur : Aucune newsletter trouvée dans le dossier '{content_dir}'")
             sys.exit(1)
         issue = issues[-1]
-        print(f"📰 Building latest issue: {issue}")
+        print(f"📰 Building latest issue: {issue} (type: {content_type})")
     
     # Vérifier que l'issue existe
-    issue_path = os.path.join(CONTENT_DIR, issue)
+    content_dir = "planned-content" if content_type == "planned" else "content"
+    issue_path = os.path.join(content_dir, issue)
     if not os.path.isdir(issue_path):
         print(f"❌ Erreur : Issue non trouvée: {issue_path}")
         sys.exit(1)
     
-    build_newsletter(issue)
+    build_newsletter(issue, content_type)
     
     # Générer la liste des newsletters pour le site
     print("\n📋 Génération de la liste des newsletters...")
