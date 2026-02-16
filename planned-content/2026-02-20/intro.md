@@ -1,6 +1,6 @@
-# Introduction
+# Le grand départ
 
-Écris ici l'introduction de la newsletter.
+Ça y est, nous partons !
 
-- Point 1
-- Point 2
+- Premier itinéraire
+- Le grand départ !
