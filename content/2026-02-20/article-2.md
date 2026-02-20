@@ -11,7 +11,7 @@ Après un café et des échanges passionnants avec les collègues, nous mettons 
 
 Notre Twingo est fin prête pour l'aventure, chargée à ras bord de dons humanitaires que nous distribuerons sur place. De notre côté, nous sommes plus que jamais prêts à nous lancer dans cette expérience inoubliable.
 
-![image](images/IMG_1668.HEIC)
+![image](images/IMG_20260220_205246.jpg)
 
 Un immense merci à tous ceux qui nous ont soutenus, de près ou de loin. La liste est longue, et votre soutien nous est précieux. ❤️
 
