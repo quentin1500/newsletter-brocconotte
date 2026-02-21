@@ -150,7 +150,7 @@ def send_newsletter(issue):
             
             # Délai entre les envois pour ne pas déclencher les filtres Gmail
             if index < len(recipients):
-                time.sleep(0.5)  # 500ms entre chaque email
+                time.sleep(3)  # 500ms entre chaque email
         
         except Exception as e:
             print(f"  [{index}/{len(recipients)}] ❌ {recipient}: {e}")
