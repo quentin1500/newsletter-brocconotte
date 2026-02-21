@@ -34,6 +34,7 @@ def md_to_html(path):
 def resize_images_in_issue(issue_path):
     """Redimensionne les images du dossier issue/images pour réduire la taille."""
     images_dir = os.path.join(issue_path, "images")
+    print(f"🔍 Redimensionnement des images dans {images_dir}...")
     if not os.path.exists(images_dir):
         return
     
