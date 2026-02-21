@@ -2,7 +2,7 @@
 
 C'est le jour J ! Nous quittons Nantes, non sans une dernière visite chaleureuse chez Onepoint et Ynov, nos précieux sponsors.
 
-![image](images/IMG-20260220-WA0000.jpg)
+![image](images/IMG20260220132848.jpg)
 
 
 Après un café et des échanges passionnants avec les collègues, nous mettons le cap vers le sud. Soleil, nous voilà !
