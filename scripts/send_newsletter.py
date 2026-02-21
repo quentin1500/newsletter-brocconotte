@@ -3,6 +3,7 @@ import sys
 import re
 import json
 import smtplib
+import time
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from google.oauth2.service_account import Credentials
@@ -93,46 +94,78 @@ def send_newsletter(issue):
     match = re.search(r'<title>(.*?)</title>', html_content)
     subject = match.group(1) if match else f"Newsletter {issue}"
     
-    # Préparer l'email
-    message = MIMEMultipart("alternative")
-    message["Subject"] = subject
-    message["From"] = SENDER_EMAIL
-    # Utiliser BCC pour masquer les destinataires entre eux
-    # Le champ "To" reste vide ou contient l'expéditeur pour éviter les spams
-    message["To"] = SENDER_EMAIL  # Évite que l'email soit marqué comme spam
-    
     # Charger les destinataires depuis Google Sheets
     recipients = load_recipients_from_sheet()
     
-    # Ajouter le contenu HTML
-    html_part = MIMEText(html_content, "html")
-    message.attach(html_part)
-    
-    # Envoyer l'email
+    # Connexion SMTP une seule fois
     try:
         print(f"📧 Connexion à {SMTP_SERVER}...")
-        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
-            server.starttls()
-            server.login(SENDER_EMAIL, SENDER_PASSWORD)
-            # sendmail() prend la liste réelle des destinataires
-            server.sendmail(SENDER_EMAIL, recipients, message.as_string())
-        
-        print(f"✅ Newsletter envoyée avec succès à {len(recipients)} destinataire(s) en BCC")
-        print(f"   Sujet : {subject}")
-    
+        server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+        server.starttls()
+        server.login(SENDER_EMAIL, SENDER_PASSWORD)
+        print(f"✅ Connexion établie")
     except smtplib.SMTPAuthenticationError:
         print("❌ Erreur d'authentification : Vérifiez vos identifiants Gmail")
         print("   💡 Utilisez un 'App Password' si vous avez 2FA activé")
         print("   📖 https://myaccount.google.com/apppasswords")
         sys.exit(1)
-    
     except smtplib.SMTPException as e:
         print(f"❌ Erreur SMTP : {e}")
         sys.exit(1)
     
-    except Exception as e:
-        print(f"❌ Erreur : {e}")
-        sys.exit(1)
+    # Envoyer les emails individuellement avec délai
+    print(f"📮 Envoi à {len(recipients)} destinataire(s)...\n")
+    failed = []
+    
+    for index, recipient in enumerate(recipients, 1):
+        try:
+            # Créer un message personnalisé pour chaque destinataire
+            message = MIMEMultipart("alternative")
+            message["Subject"] = subject
+            message["From"] = SENDER_EMAIL
+            message["To"] = recipient  # Champ To avec le destinataire réel
+            message["List-Unsubscribe"] = f"<mailto:{SENDER_EMAIL}?subject=unsubscribe>"
+            message["X-Mailer"] = "Newsletter Brocconotte"
+            
+            # Ajouter le contenu HTML (et idealement aussi du texte brut)
+            html_part = MIMEText(html_content, "html", _charset="utf-8")
+            message.attach(html_part)
+            
+            # Envoyer jusqu'à 3 fois pour éviter les erreurs temporaires
+            max_retries = 3
+            for attempt in range(max_retries):
+                try:
+                    server.sendmail(SENDER_EMAIL, [recipient], message.as_string())
+                    print(f"  [{index}/{len(recipients)}] ✅ {recipient}")
+                    break
+                except smtplib.SMTPServerDisconnected:
+                    if attempt < max_retries - 1:
+                        print(f"  [{index}/{len(recipients)}] ⏳ Reconnexion pour {recipient}...")
+                        server.quit()
+                        server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+                        server.starttls()
+                        server.login(SENDER_EMAIL, SENDER_PASSWORD)
+                    else:
+                        raise
+            
+            # Délai entre les envois pour ne pas déclencher les filtres Gmail
+            if index < len(recipients):
+                time.sleep(0.5)  # 500ms entre chaque email
+        
+        except Exception as e:
+            print(f"  [{index}/{len(recipients)}] ❌ {recipient}: {e}")
+            failed.append(recipient)
+    
+    server.quit()
+    
+    # Résumé
+    print(f"\n{'='*50}")
+    if failed:
+        print(f"⚠️  {len(recipients) - len(failed)}/{len(recipients)} envoyés avec succès")
+        print(f"   Erreurs : {', '.join(failed)}")
+    else:
+        print(f"✅ Tous les {len(recipients)} emails envoyés avec succès!")
+    print(f"   Sujet : {subject}")
 
 
 if __name__ == "__main__":
