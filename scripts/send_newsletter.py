@@ -146,12 +146,16 @@ if __name__ == "__main__":
         issue = os.getenv("NEWSLETTER_ISSUE")
         print(f"📰 Sending issue from env: {issue}")
     else:
-        # Utiliser la dernière édition
-        from build_newsletter import CONTENT_DIR
-        
-        issues = sorted(os.listdir(CONTENT_DIR))
+        # Utiliser la dernière édition (dossier 'content')
+        # build_newsletter n'exporte plus CONTENT_DIR — on utilise 'content' par défaut.
+        content_dir = "content"
+        if not os.path.isdir(content_dir):
+            print(f"❌ Erreur : Dossier de contenu introuvable : {content_dir}")
+            sys.exit(1)
+
+        issues = sorted(os.listdir(content_dir))
         if not issues:
-            print("❌ Aucune newsletter trouvée")
+            print(f"❌ Aucune newsletter trouvée dans {content_dir}")
             sys.exit(1)
         issue = issues[-1]
         print(f"📰 Sending latest issue: {issue}")
