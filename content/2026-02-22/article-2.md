@@ -4,11 +4,11 @@ Nous y sommes ! Après une longue route, nous avons rejoint le point de rallieme
 
 Avez-vous déjà vu un tel rassemblement de ces petites bombes, toutes préparées pour affronter le désert marocain ? C'est tout simplement impressionnant. Le désert n'a qu'à bien se tenir !
 
-![image](images/placeholder.jpg)
+![image](images/Twingos.jpeg)
 
 Le premier briefing nous a permis de rencontrer enfin les organisateurs "en vrai", après des mois d'échanges à distance pour préparer ce périple. On sent tout de suite le sérieux et la passion qui les animent.
 
-![image](images/placeholder.jpg)
+![image](images/Photo-groupe-algeciras.jpeg)
 
 Mais au-delà de l'organisation, c'est l'ambiance qui est incroyable : la joie et la bonne humeur sont palpables. Une chose est sûre, nous allons bien nous amuser ! Le coup d'envoi est donné.
 
