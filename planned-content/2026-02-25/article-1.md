@@ -1,8 +1,8 @@
 # Arrivée à Merzouga : Premières pistes et paysages grandioses !
 
-Pour atteindre Merzouga, nous avons avalé près de 300 km de route et, surtout, de pistes ! C'est dans ces conditions que la préparation de notre Twingo prend tout son sens. Un grand merci à nos suspensions renforcées qui ont fait des merveilles !
+Pour atteindre Merzouga, nous avons avalé près de 300 km de route et quelques pistes !
 
-Nous avons egalement dû faire une petite étape pour réparer nos freins endommagés (ça arrive, c'est l'aventure !).
+Nous avons malheureusement dû faire une petite étape pour réparer nos freins endommagés (ça arrive, c'est l'aventure !). Il s'agissait du maître cylindre, qui etait vraisemblablement déjà bien abîmé. L'occasion de voir les mécaniciens marocains à l'œuvre, mais surtout de se créer des souvenirs !
 
 (image réparation)
 
