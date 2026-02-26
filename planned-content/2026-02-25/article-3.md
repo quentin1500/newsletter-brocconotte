@@ -11,4 +11,4 @@ La vitesse et le defi sont grisant dans ces conditions, mais les paysages nous e
 
 Nous ne sommes pas les seuls dans le coin puisque nous rencontrons les 4L, nos grandes soeurs qui  sont aussi en mission dans le désert !
 
-(image)[images/]
+![image](images/IMG-20260226-WA0001.jpg)
