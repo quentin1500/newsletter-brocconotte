@@ -6,4 +6,4 @@ En 2007, il créé l'association du village avec des jeunes, en repercussion d'u
 
 C'est dans ce contexte que nous avons remis une partie des dons que vous nous avez aidés à collecter a cette association ainsi qu'aux écoles locales : du matériel administratif, des fournitures scolaires, des livres et des jeux. Ces moments de partage et d'échange nous rappellent pourquoi nous nous sommes lancés dans cette aventure.
 
-![image](images/placeholder.jpg)
+![image](images/IMG20260225115517.jpg)
