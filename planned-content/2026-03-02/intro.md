@@ -4,7 +4,7 @@ Nous y sommes, Marrakech ! C'est le dernier jour de notre incroyable périple, e
 
 Mission accomplie : tout le matériel humanitaire a été distribué aux populations qui en avaient besoin, une immense satisfaction pour nous.
 
-Et que dire de notre fidèle Twingo ? Toujours vaillante, elle a parcouru près de 6 000 km depuis Nantes, s'imposant comme la véritable héroïne de ce raid !
+Et que dire de notre fidèle Twingo ? Toujours vaillante, elle a parcouru près de 5 000 km depuis Nantes, s'imposant comme la véritable héroïne de ce raid !
 
 Mais l'aventure n'est pas tout à fait terminée... maintenant, il faut rentrer !
 
