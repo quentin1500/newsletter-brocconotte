@@ -9,6 +9,6 @@ Enfin, nous reprendrons le ferry pour traverser la Méditerranée et rejoindre l
 
 Voici une estimation de l’itinéraire :
 
-![image](images/placeholder.jpg)
+![image](images/itineraire.jpg)
 
 Arrivée prévue à la maison, à Nantes dimanche après midi.
