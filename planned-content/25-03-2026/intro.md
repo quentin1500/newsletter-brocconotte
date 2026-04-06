@@ -10,5 +10,6 @@ C'est donc la fin de cette aventure qui a duré 15 jours sur le terrain, mais pr
 
 - Tourisme et bons moments au Maroc
 - Traversée du détroit et retour en France
+- Rétrospective sur le désert
 - Le bilan mécanique
 - Au revoir et remerciements
