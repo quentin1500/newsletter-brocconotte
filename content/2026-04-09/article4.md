@@ -1,8 +1,8 @@
 # Le bilan mécanique
 
-Au total, entre le 20 février et le 8 mars, nous avons parcouru environ XXX kilomètres.
+Au total, entre le 20 février et le 8 mars, nous avons parcouru environ **6435** kilomètres.
 
-![image](images/kilometre.png)
+![image](images/compteur.JPEG)
 
 Après tous ces kilomètres, surtout dans le désert et sur des routes très cassantes, la voiture a quand même beaucoup travaillé. La bonne nouvelle, c’est que la Twingo a tenu le coup, mais elle a tout de même laissé quelques traces de son effort.
 
@@ -36,5 +36,5 @@ Bilan : la voiture a souffert, mais elle a tenu. Il reste des réparations à fa
 
 Nous allons aussi réfléchir à quelques améliorations pratiques, inspirées des autres voitures que nous avons croisées sur la route. À suivre...
 
-![image](images/twing_suisse.JPG)
+![image](images/twingos.JPEG)
 

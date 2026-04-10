@@ -14,6 +14,6 @@ Le lendemain, traversée de toute l'Espagne jusqu'à San Sebastián, à la front
 
 Dernière étape de notre long périple, presque à la maison, en passant par Bordeaux chez nos amis Khaoula, Édouard, Margot et Quentin. La première occasion de raconter notre voyage autour d'un verre de vin à la française : officiellement de retour en France !
 
-Sprint final pour la Twingo afin de boucler les derniers kilomètres qui nous séparaient de la maison.
+Puis, le sprint final pour notre Twingo afin de boucler les derniers kilomètres qui nous séparaient de la maison.
 
-Retour à la réalité : il nous faudra reprendre notre activité classique, mais la tête est remplie de nombreux souvenirs et la Twingo de sable !
+Et enfin, retour à la réalité : il nous faudra reprendre notre activité classique, mais la tête est remplie de nombreux souvenirs et la Twingo de sable !

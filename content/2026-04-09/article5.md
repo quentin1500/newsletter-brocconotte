@@ -7,3 +7,11 @@ Nous tenions à vous remercier pour l’attention que vous nous avez portée et 
 À quand de nouvelles aventures ? ...
 
 ![image](images/fin.jpg)
+
+
+
+
+
+
+
+PS : si vous avez participé à l'aventure en nous soutenant financièrement et que vous n'avez pas reçu votre justificatif, n'hésitez pas à nous écrire à brocconotte@gmail.com.
